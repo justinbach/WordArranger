@@ -20,7 +20,7 @@
     if (self) {
         _wordLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         _wordLabel.text = [text stringByAppendingString:@" "];
-        _wordLabel.fontSize = 20;
+        _wordLabel.fontSize = 30;
         _wordLabel.position = CGPointZero;
         _wordLabel.fontColor = [SKColor colorWithWhite:1.0 alpha:1.0];
         _wordLabel.xScale = 1.0;
@@ -39,8 +39,12 @@
     NSLog(@"WordPartNode text: %@", _wordLabel.text);
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [_delegate wordPartTouchesBegan:self withTouches:touches withEvent:event];
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [_delegate wordPartTouchesMoved:self withTouches:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [_delegate wordPartTouchesEnded:self withTouches:touches withEvent:event];
 }
 
 

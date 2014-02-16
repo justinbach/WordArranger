@@ -22,5 +22,6 @@
 
 @protocol WordPartNodeDelegate <NSObject>
 @required
--(void)wordPartTouchesBegan:(WordPartNode *)wordPartNode withTouches:(NSSet *)touches withEvent:(UIEvent *)event;
+-(void)wordPartTouchesMoved:(WordPartNode *)wordPartNode withTouches:(NSSet *)touches withEvent:(UIEvent *)event;
+-(void)wordPartTouchesEnded:(WordPartNode *)wordPartNode withTouches:(NSSet *)touches withEvent:(UIEvent *)event;
 @end
