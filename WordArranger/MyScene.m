@@ -52,6 +52,10 @@ const float kSpacing = 20;
 }
 
 -(void)reorderWordParts:(WordPartNode *)movedPart {
+    if ([_tmpWordParts count] == [_wordParts count]) { // TODO: more complex validation logic
+        // word was re-integrated into the flow
+        _wordParts = _tmpWordParts;
+    }
     [self refreshOrderFromArray:_wordParts];
     _tmpWordParts = [NSMutableArray arrayWithArray:_wordParts];
 }
@@ -67,7 +71,15 @@ const float kSpacing = 20;
    
     // is the word re-entering the flow?
     if ([_container intersectsNode:movedPart] && ![_tmpWordParts containsObject:movedPart]) {
-        [_tmpWordParts addObject:movedPart];
+        // figure out where it's re-entering the flow
+        int flowIndex = [_tmpWordParts count]; // default to the end
+        for (WordPartNode *wp in _tmpWordParts) {
+            if (movedPart.position.x < wp.position.x) {
+                flowIndex = [_tmpWordParts indexOfObject:wp];
+                break;
+            }
+        }
+        [_tmpWordParts insertObject:movedPart atIndex:flowIndex];
         changed = YES;
     }
    
