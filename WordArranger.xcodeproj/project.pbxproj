@@ -24,6 +24,7 @@
 		5615DCF218B0FCDC00F9EE2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5615DCCD18B0FCDC00F9EE2D /* UIKit.framework */; };
 		5615DCFA18B0FCDC00F9EE2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5615DCF818B0FCDC00F9EE2D /* InfoPlist.strings */; };
 		5615DCFC18B0FCDC00F9EE2D /* WordArrangerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5615DCFB18B0FCDC00F9EE2D /* WordArrangerTests.m */; };
+		5615DD0718B0FD2100F9EE2D /* WordPartNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5615DD0618B0FD2100F9EE2D /* WordPartNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		5615DCF718B0FCDC00F9EE2D /* WordArrangerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WordArrangerTests-Info.plist"; sourceTree = "<group>"; };
 		5615DCF918B0FCDC00F9EE2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5615DCFB18B0FCDC00F9EE2D /* WordArrangerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordArrangerTests.m; sourceTree = "<group>"; };
+		5615DD0518B0FD2100F9EE2D /* WordPartNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordPartNode.h; sourceTree = "<group>"; };
+		5615DD0618B0FD2100F9EE2D /* WordPartNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordPartNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				5615DCE618B0FCDC00F9EE2D /* Spaceship.png */,
 				5615DCE818B0FCDC00F9EE2D /* Images.xcassets */,
 				5615DCD218B0FCDC00F9EE2D /* Supporting Files */,
+				5615DD0518B0FD2100F9EE2D /* WordPartNode.h */,
+				5615DD0618B0FD2100F9EE2D /* WordPartNode.m */,
 			);
 			path = WordArranger;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 			files = (
 				5615DCE518B0FCDC00F9EE2D /* MyScene.m in Sources */,
 				5615DCE218B0FCDC00F9EE2D /* ViewController.m in Sources */,
+				5615DD0718B0FD2100F9EE2D /* WordPartNode.m in Sources */,
 				5615DCDC18B0FCDC00F9EE2D /* AppDelegate.m in Sources */,
 				5615DCD818B0FCDC00F9EE2D /* main.m in Sources */,
 			);
