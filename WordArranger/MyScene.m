@@ -26,7 +26,7 @@ const float kSpacing = 20;
         /* Setup your scene here */
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
         
-        _container = [SKSpriteNode spriteNodeWithColor:[SKColor colorWithWhite:0.2 alpha:1.0] size:CGSizeZero];
+        _container = [SKSpriteNode spriteNodeWithColor:[SKColor colorWithWhite:0.0 alpha:1.0] size:CGSizeZero];
         
         NSArray *wordList = @[@"this", @"is", @"a", @"test"];
         // initialize the words
@@ -61,12 +61,11 @@ const float kSpacing = 20;
 }
 
 -(void)updateWordParts:(WordPartNode *)movedPart {
-    BOOL changed = NO;
     
     // is the word leaving the flow?
     if (![_container intersectsNode:movedPart] && [_tmpWordParts containsObject:movedPart]) {
         [_tmpWordParts removeObject:movedPart];
-        changed = YES;
+        [self refreshOrderFromArray:_tmpWordParts];
     }
    
     // is the word re-entering the flow?
@@ -80,20 +79,24 @@ const float kSpacing = 20;
             }
         }
         [_tmpWordParts insertObject:movedPart atIndex:flowIndex];
-        changed = YES;
+        [self refreshOrderFromArray:_tmpWordParts withFocusItem:movedPart];
     }
    
-    if (changed)
-    {
-        [self refreshOrderFromArray:_tmpWordParts];
-    }
 }
 
 -(void)refreshOrderFromArray:(NSMutableArray *)wordPartArray {
-    float cumX = 0;
+    [self refreshOrderFromArray:wordPartArray withFocusItem:nil];
+}
+
+-(void)refreshOrderFromArray:(NSMutableArray *)wordPartArray withFocusItem:(WordPartNode *)focusNode {
+    float offsetX = 0, cumX = 0, maxHeight = 0;
+    if (focusNode != nil)
+    {
+        offsetX = focusNode.position.x / 2;
+    }
     for (WordPartNode *wp in wordPartArray) {
-        CGPoint canonicalPosition = CGPointMake(cumX, 0);
-        if (!CGPointEqualToPoint(canonicalPosition, wp.position)) {
+        CGPoint canonicalPosition = CGPointMake(cumX - offsetX, 0);
+        if (!CGPointEqualToPoint(canonicalPosition, wp.position) && focusNode != wp) {
             SKAction *moveAction = [SKAction moveTo:canonicalPosition duration:0.5];
             moveAction.timingMode = SKActionTimingEaseOut;
             [wp runAction:moveAction];
@@ -104,8 +107,12 @@ const float kSpacing = 20;
         {
             cumX += kSpacing;
         }
+        
+        if (wp.size.height > maxHeight) {
+            maxHeight = wp.size.height;
+        }
     }
-    [_container setSize:CGSizeMake(cumX, ((WordPartNode *)[_wordParts objectAtIndex:0]).size.height)];
+    [_container setSize:CGSizeMake(cumX, maxHeight)];
 }
 
 -(void)wordPartTouchesMoved:(WordPartNode *)wordPartNode withTouches:(NSSet *)touches withEvent:(UIEvent *)event {
