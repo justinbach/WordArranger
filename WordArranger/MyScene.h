@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "WordPartNode.h"
 
-@interface MyScene : SKScene
+@interface MyScene : SKScene <WordPartNodeDelegate>
 
 @end

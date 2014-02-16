@@ -10,4 +10,17 @@
 
 @interface WordPartNode : SKSpriteNode
 
+- (id)delegate;
+- (void)setDelegate:(id)newDelegate;
+
+- (WordPartNode *)initWithText:(NSString *)text;
+- (void)logText;
+
+@property (nonatomic, strong) id delegate;
+
+@end
+
+@protocol WordPartNodeDelegate <NSObject>
+@required
+-(void)wordPartTouchesBegan:(WordPartNode *)wordPartNode withTouches:(NSSet *)touches withEvent:(UIEvent *)event;
 @end
