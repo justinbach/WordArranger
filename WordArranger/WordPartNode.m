@@ -16,17 +16,19 @@
 
 - (WordPartNode *)initWithText:(NSString *)text
 {
-    self = [super initWithColor:[SKColor colorWithWhite:0.2 alpha:1.0] size:CGSizeZero];
+    self = [super initWithColor:[SKColor colorWithWhite:0.6 alpha:0.5] size:CGSizeZero];
     if (self) {
         _wordLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         _wordLabel.text = [text stringByAppendingString:@" "];
-        _wordLabel.fontSize = 30;
+        _wordLabel.fontSize = 50;
         _wordLabel.position = CGPointZero;
         _wordLabel.fontColor = [SKColor colorWithWhite:1.0 alpha:1.0];
         _wordLabel.xScale = 1.0;
         _wordLabel.yScale = 1.0;
+        _wordLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         
         self.size = _wordLabel.frame.size;
+        self.anchorPoint = CGPointZero;
         self.userInteractionEnabled = YES;
         
         [self addChild:_wordLabel];
