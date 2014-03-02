@@ -65,7 +65,6 @@ const float kSpacing = 20;
     // is the word leaving the flow?
     if (![_container intersectsNode:movedPart] && [_tmpWordParts containsObject:movedPart]) {
         [_tmpWordParts removeObject:movedPart];
-        [self refreshOrderFromArray:_tmpWordParts];
     }
    
     // is the word re-entering the flow?
