@@ -62,23 +62,27 @@ const float kSpacing = 20;
 
 -(void)updateWordParts:(WordPartNode *)movedPart {
     
-    // is the word leaving the flow?
-    if (![_container intersectsNode:movedPart] && [_tmpWordParts containsObject:movedPart]) {
-        [_tmpWordParts removeObject:movedPart];
-    }
-   
-    // is the word re-entering the flow?
-    if ([_container intersectsNode:movedPart] && ![_tmpWordParts containsObject:movedPart]) {
-        // figure out where it's re-entering the flow
-        int flowIndex = [_tmpWordParts count]; // default to the end
+    // figure out if the word's position has changed in the flow
+    if ([_container intersectsNode:movedPart]) {
+        int curIndex  = [_tmpWordParts indexOfObject:movedPart];
+        int newIndex = curIndex;
         for (WordPartNode *wp in _tmpWordParts) {
-            if (movedPart.position.x < wp.position.x) {
-                flowIndex = [_tmpWordParts indexOfObject:wp];
+            int tmpIndex = [_tmpWordParts indexOfObject:wp];
+            if (movedPart.position.x < wp.position.x && tmpIndex < curIndex) {
+                newIndex = [_tmpWordParts indexOfObject:wp];
+                break;
+            }
+            if (movedPart.position.x > wp.position.x && tmpIndex > curIndex) {
+                newIndex = [_tmpWordParts indexOfObject:wp];
                 break;
             }
         }
-        [_tmpWordParts insertObject:movedPart atIndex:flowIndex];
-        [self refreshOrderFromArray:_tmpWordParts withFocusItem:movedPart];
+        
+        if (newIndex != curIndex) {
+            [_tmpWordParts removeObject:movedPart];
+            [_tmpWordParts insertObject:movedPart atIndex:newIndex];
+            [self refreshOrderFromArray:_tmpWordParts withFocusItem:movedPart];
+        }
     }
    
 }
