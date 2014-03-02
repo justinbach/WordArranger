@@ -89,13 +89,9 @@ const float kSpacing = 20;
 }
 
 -(void)refreshOrderFromArray:(NSMutableArray *)wordPartArray withFocusItem:(WordPartNode *)focusNode {
-    float offsetX = 0, cumX = 0, maxHeight = 0;
-    if (focusNode != nil)
-    {
-        offsetX = focusNode.position.x / 2;
-    }
+    float cumX = 0, maxHeight = 0;
     for (WordPartNode *wp in wordPartArray) {
-        CGPoint canonicalPosition = CGPointMake(cumX - offsetX, 0);
+        CGPoint canonicalPosition = CGPointMake(cumX, 0);
         if (!CGPointEqualToPoint(canonicalPosition, wp.position) && focusNode != wp) {
             SKAction *moveAction = [SKAction moveTo:canonicalPosition duration:0.5];
             moveAction.timingMode = SKActionTimingEaseOut;
